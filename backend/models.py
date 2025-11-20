@@ -9,7 +9,7 @@ class User(db.Model):
     __tablename__ = 'users'
     
     userid = db.Column(db.Integer, primary_key=True,autoincrement=True)
-    usertype=db.Column(db.String(50))
+    #usertype=db.Column(db.String(50))
     email=db.Column(db.String(50))
     password=db.Column(db.String(255))
     secretkey=db.Column(db.String(255))

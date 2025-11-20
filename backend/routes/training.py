@@ -15,7 +15,7 @@ def add_training():
         title = request.form.get('title')
         provider= request.form.get('provider')
         location = request.form.get('location')
-        level = request.form.get('level ')
+        level = request.form.get('level')
         posted_at = request.form.get('posted_at')
         paid_free = request.form.get('paid_free')
         link = request.form.get('link')
@@ -34,16 +34,17 @@ def add_training():
 
 @Training_bp.route('/delete/<int:id>',methods=['DELETE']) #done
 def delete_training(id):
-    training = db.session.query(Training).filter(Training.trainingid==id).first()
+    training = db.session.query(Training).filter(Training.training_id==id).first()
     try:
         if training:
             db.session.delete(training)
             db.session.commit()
-            flash('training deleted successfully' 'success')
+            flash('training deleted successfully', 'success')
             return redirect(url_for('training.display_all'))
     except Exception as e:
         db.session.rollback()
         flash(f'unexpected error occured!!: {e}','danger')
+        return redirect(url_for('training.display_all'))
 
 
 @Training_bp.route('/displayall',methods=['GET'])

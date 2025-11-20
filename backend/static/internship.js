@@ -1,4 +1,4 @@
-// internship.js
+
 import CONFIG from "./config.js";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     async function fetchInternships(category, location) {
-        // Build query to include "internship" explicitly
+        //build query
         const query = `${category} internship in ${location}`;
 
         const params = new URLSearchParams({
@@ -49,13 +49,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const data = await response.json();
 
-        // Filter only results where employment type includes "Internship"
+        //filter internships
         return data?.data?.filter(job =>
             job.job_employment_type?.toLowerCase().includes("internship") ||
             job.job_title?.toLowerCase().includes("internship")
         ) || [];
     }
-
+    //display available internships
     function displayInternships(internships) {
         internshipResults.innerHTML = "";
 
@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const row = document.createElement("div");
         row.className = "row g-4";
-
+     //card design according to how i want to fetch it
         internships.forEach(job => {
             const col = document.createElement("div");
             col.className = "col-md-4";

@@ -1,4 +1,4 @@
-// FutureReady Hub Main JavaScript
+//main.js
 
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize search functionality
@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function initSearchForms() {
-    // Internship search form
+    //internship form
     const internshipForm = document.getElementById('internshipSearchForm');
     if (internshipForm) {
         internshipForm.addEventListener('submit', function(e) {
@@ -15,7 +15,7 @@ function initSearchForms() {
         });
     }
 
-    // Training search form
+    //training form
     const trainingForm = document.getElementById('trainingSearchForm');
     if (trainingForm) {
         trainingForm.addEventListener('submit', function(e) {
@@ -24,7 +24,7 @@ function initSearchForms() {
         });
     }
 }
-
+//search internship
 async function searchInternships(form) {
     const formData = new FormData(form);
     const params = new URLSearchParams();
@@ -50,7 +50,7 @@ async function searchInternships(form) {
         showLoading(false);
     }
 }
-
+//search training
 async function searchTraining(form) {
     const formData = new FormData(form);
     const params = new URLSearchParams();
@@ -76,7 +76,7 @@ async function searchTraining(form) {
         showLoading(false);
     }
 }
-
+//display all results
 function displayResults(results, type) {
     const resultsContainer = document.getElementById('searchResults');
     const resultCount = document.getElementById('resultCount');
@@ -105,7 +105,7 @@ function displayResults(results, type) {
     
     resultsContainer.innerHTML = html;
 }
-
+//create intenship card
 function createInternshipCard(internship) {
     return `
         <div class="card mb-3 opportunity-card">
@@ -135,7 +135,7 @@ function createInternshipCard(internship) {
         </div>
     `;
 }
-
+//create training form
 function createTrainingCard(course) {
     const freeBadge = course.is_free ? '<span class="free-badge">FREE</span>' : '';
     
@@ -168,7 +168,7 @@ function createTrainingCard(course) {
         </div>
     `;
 }
-
+//show search loading
 function showLoading(show) {
     const buttons = document.querySelectorAll('button[type="submit"]');
     buttons.forEach(button => {
@@ -185,7 +185,7 @@ function showLoading(show) {
         }
     });
 }
-
+//if error occur it display what exactly is the problem
 function showError(message) {
     const resultsContainer = document.getElementById('searchResults');
     resultsContainer.innerHTML = `

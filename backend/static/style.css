@@ -1,4 +1,4 @@
-/* FutureReady Hub Custom Styles */
+/*future ready hub  hero section css*/
 .hero-section {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
@@ -6,7 +6,7 @@
 
 .hero-section h1 {
     font-weight: 700;
-}
+} 
 
 .card {
     transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
@@ -36,7 +36,7 @@
     font-weight: 600;
 }
 
-/* Responsive improvements */
+/*responsive improvement*/
 @media (max-width: 768px) {
     .hero-section h1 {
         font-size: 2rem;
@@ -47,7 +47,7 @@
     }
 }
 
-/* Loading animation */
+/*loading animation*/
 .loading {
     opacity: 0.6;
     pointer-events: none;

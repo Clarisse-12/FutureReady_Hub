@@ -11,15 +11,27 @@
         <div class="container">
             <a class="navbar-brand fw-bold" href="{{url_for('search.home')}}">FutureReady Hub</a>
             <div class="navbar-nav ms-auto">
-                <a class="nav-link" href="{{url_for('search.home')}}">Home</a>
-                <a class="nav-link active" href="{{url_for('search.contact')}}">Contact</a>
+                <a class="nav-link" href="{{url_for('search.home')}}"data-translate>Home</a>
                 <a class="nav-link active" href="{{url_for('search.search')}}">Search</a>
                 <a class="nav-link" href="{{url_for('search.resource')}}">Resources</a>
                 <a class="nav-link" href="{{url_for('auth.logout')}}">Logout</a>
-                <a class="nav-link active" href="{{url_for('search.dashboard')}}">Admin</a>
             </div>
         </div>
     </nav>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul class="flashes list-unstyled position-fixed top-0 start-50 translate-middle-x mt-3" style="z-index: 1050;">
+                {% for category, message in messages %}
+                    <li>
+                        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
 
     <div class="container flex-grow-1 mt-4">
         <h2>Find Opportunities</h2>
@@ -86,48 +98,23 @@
                     <h2 class="text-center mb-4">Available internship from Research</h2>
 
                     <div class="row g-4 justify-content-center">
-                        <!-- Job Card 1 -->
-                        <div class="col-md-4">
-                            <div class="card h-100 shadow-sm">
-                                <div class="card-body">
-                                    <p class="mb-1"><strong>Title:</strong> Mechanician</p>
-                                    <p class="mb-1"><strong>provider:</strong> Keza Car Rent</p>
-                                    <p class="mb-1"><strong>Location:</strong> Kimironko</p>
-                                    <p class="mb-1"><strong>Salary:</strong> 450k/500k Frw</p>
-                                    <p class="mb-3"><strong>Posted:</strong> 2 hours ago</p>
-                                    <a href="#" class="btn btn-primary w-100">Apply Now</a>
+                        {%for data in internship%}
+                            <!-- Job Card 1 -->
+                            <div class="col-md-4">
+                                <div class="card h-100 shadow-sm">
+                                    <div class="card-body">
+                                        <p class="mb-1"><strong>Title:</strong> {{data.title}}</p>
+                                        <p class="mb-1"><strong>provider:</strong> {{data.provider}}</p>
+                                        <p class="mb-1"><strong>Location:</strong> {{data.location}}</p>
+                                        <p class="mb-1"><strong>Salary:</strong> {{data.salary}}</p>
+                                        <p class="mb-3"><strong>Posted:</strong>{{data.posted_at}}</p>
+                                        <a href="{{data.link}}" class="btn btn-primary w-100">Apply Now</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <!-- Job Card 2 -->
-                        <div class="col-md-4">
-                            <div class="card h-100 shadow-sm">
-                                <div class="card-body">
-                                    <p class="mb-1"><strong>Title:</strong> accountant</p>
-                                    <p class="mb-1"><strong>Company:</strong> Baho Pharmacy</p>
-                                    <p class="mb-1"><strong>Location:</strong> Kabeza</p>
-                                    <p class="mb-1"><strong>Salary:</strong> 450k/500k Frw</p>
-                                    <p class="mb-3"><strong>Posted:</strong> 2 weeks ago</p>
-                                    <a href="#" class="btn btn-primary w-100">Apply Now</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Job Card 3 -->
-                        <div class="col-md-4">
-                            <div class="card h-100 shadow-sm">
-                                <div class="card-body">
-                                    <p class="mb-1"><strong>Title:</strong> electrician</p>
-                                    <p class="mb-1"><strong>Company:</strong>Kibagabaga college</p>
-                                    <p class="mb-1"><strong>Location:</strong> Kibagabaga</p>
-                                    <p class="mb-1"><strong>Salary:</strong> 450k/500k Frw</p>
-                                    <p class="mb-3"><strong>Posted:</strong> 3 weeks ago</p>
-                                    <a href="#" class="btn btn-primary w-100">Apply Now</a>
-                                </div>
-                            </div>
-                        </div>
+                        {%endfor%}
                     </div>
+
                 </div>
             </div>
 
@@ -200,50 +187,22 @@
                     <h2 class="text-center mb-4">Available Training randomly</h2>
 
                     <div class="row g-4 justify-content-center">
-                        <!-- Job Card 1 -->
-                        <div class="col-md-4">
-                            <div class="card h-100 shadow-sm">
-                                <div class="card-body">
-                                    <p class="mb-1"><strong>Title:</strong>tailor</p>
-                                    <p class="mb-1"><strong>provider:</strong> queen shop</p>
-                                    <p class="mb-1"><strong>Location:</strong> Kimironko</p>
-                                    <p class="mb-1"><strong>level:</strong> beginner</p>
-                                    <p class="mb-1"><strong>paid/free:</strong>free</p>
-                                    <p class="mb-3"><strong>Posted:</strong> 2 hours ago</p>
-                                    <a href="#" class="btn btn-primary w-100">Apply Now</a>
+                        {%for data in training%}
+                            <!-- Job Card 1 -->
+                            <div class="col-md-4">
+                                <div class="card h-100 shadow-sm">
+                                    <div class="card-body">
+                                        <p class="mb-1"><strong>Title:</strong>{{data.title}}</p>
+                                        <p class="mb-1"><strong>provider:</strong> {{data.provider}}</p>
+                                        <p class="mb-1"><strong>Location:</strong>{{data.location}}</p>
+                                        <p class="mb-1"><strong>level:</strong> {{data.level}}</p>
+                                        <p class="mb-1"><strong>paid/free:</strong>{{data.paid_free}}</p>
+                                        <p class="mb-3"><strong>Posted:</strong> {{data.posted_at}}</p>
+                                        <a href="{{data.link}}" class="btn btn-primary w-100">Apply Now</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <!-- Job Card 2 -->
-                        <div class="col-md-4">
-                            <div class="card h-100 shadow-sm">
-                                <div class="card-body">
-                                    <p class="mb-1"><strong>Titli:</strong> Mechanician</p>
-                                    <p class="mb-1"><strong>Provider:</strong>Kimironko garage</p>
-                                    <p class="mb-1"><strong>Location:</strong> Kimironko</p>
-                                    <p class="mb-1"><strong>level:</strong>intermediate</p>
-                                    <p class="mb-1"><strong>paid/free:</strong>paid:100k</p>
-                                    <p class="mb-3"><strong>Posted:</strong> 2 weeks ago</p>
-                                    <a href="#" class="btn btn-primary w-100">Apply Now</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Job Card 3 -->
-                        <div class="col-md-4">
-                            <div class="card h-100 shadow-sm">
-                                <div class="card-body">
-                                    <p class="mb-1"><strong>Title:</strong>electrician</p>
-                                    <p class="mb-1"><strong>provider:</strong>cyuzuzo electrical college</p>
-                                    <p class="mb-1"><strong>Location:</strong> Gikondo</p>
-                                    <p class="mb-1"><strong>level:</strong>beginner</p>
-                                    <p class="mb-1"><strong>paid/free:</strong>free</p>
-                                    <p class="mb-3"><strong>Posted:</strong> 3 weeks ago</p>
-                                    <a href="#" class="btn btn-primary w-100">Apply Now</a>
-                                </div>
-                            </div>
-                        </div>
+                        {%endfor%}
                     </div>
                 </div>
         
@@ -258,10 +217,27 @@
 <script type="module" src="../static/training.js"></script>
 
 
+
      <footer class="footer mt-auto py-3 bg-dark text-white">
         <div class="container text-center">
             <p class="mb-0">&copy; 2025 FutureReady Hub. Empowering youth and teenage mothers in Rwanda.</p>
         </div>
     </footer>
+
+    <script>
+        // Wait for the page to load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Select all flash alerts
+            const alerts = document.querySelectorAll('.alert');
+            alerts.forEach(alert => {
+                // Set timeout to remove alert after 3 seconds (3000ms)
+                setTimeout(() => {
+                    // Bootstrap 5 method to close alert
+                    const bsAlert = new bootstrap.Alert(alert);
+                    bsAlert.close();
+                }, 3000);
+            });
+        });
+    </script>
 </body>
 </html>

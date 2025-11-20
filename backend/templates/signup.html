@@ -9,9 +9,8 @@
 <body>
     <nav class="navbar navbar-dark bg-secondary">
         <div class="container">
-            <a class="navbar-brand" href="{{url_for('search.home')}}">FutureReady Hub</a>
+            <a class="navbar-brand" href="#">FutureReady Hub</a>
              <div class="navbar-nav ms-auto">
-                <a class="nav-link" href="{{url_for('search.home')}}">Home</a>
             </div>
         </div>
     </nav>
@@ -23,28 +22,21 @@
                     <div class="card-body">
                         <h2 class="text-center mb-4">Sign Up</h2>
                         {% with messages = get_flashed_messages(with_categories=true) %}
-
                             {% if messages %}
-                            
-                                <ul class="flashes">
-                                {% for category, message in messages %}
-                                    <span class="alert alert-{{ category }}" role="alert">
-                                    {{ message }}
-                                    </span>
-                                {% endfor %}
+                                <ul class="flashes list-unstyled position-fixed top-0 start-50 translate-middle-x mt-3" style="z-index: 1050;">
+                                    {% for category, message in messages %}
+                                        <li>
+                                            <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                                                {{ message }}
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                            </div>
+                                        </li>
+                                    {% endfor %}
                                 </ul>
                             {% endif %}
                         {% endwith %}
                         
                         <form action="{{url_for('auth.register')}}" method="POST">
-                            <div class="mb-3">
-                                <label class="form-label">user_type</label>
-                                <select class="form-select" name="usertype" id="userType" required>
-                                    <option value="">Select user type</option>
-                                    <option value="user">Regular User</option>
-                                    <option value="admin">Admin</option>
-                                </select>
-                            </div>
                             
                             <div class="mb-3">
                                 <label class="form-label">Email</label>
@@ -67,7 +59,7 @@
                         </form>
                         
                         <div class="text-center mt-3">
-                            <p>Already have an account? <a href="{{url_for('auth.login')}}">Login here</a></p>
+                            <p>Already have an account? <a href="{{url_for('search.select')}}">Login here</a></p>
                         </div>
                     </div>
                 </div>
@@ -98,6 +90,21 @@
                 alert('Admin Secret ID is required for admin login');
                 return;
             }
+        });
+    </script>
+    <script>
+        // Wait for the page to load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Select all flash alerts
+            const alerts = document.querySelectorAll('.alert');
+            alerts.forEach(alert => {
+                // Set timeout to remove alert after 3 seconds (3000ms)
+                setTimeout(() => {
+                    // Bootstrap 5 method to close alert
+                    const bsAlert = new bootstrap.Alert(alert);
+                    bsAlert.close();
+                }, 3000);
+            });
         });
     </script>
 </body>
