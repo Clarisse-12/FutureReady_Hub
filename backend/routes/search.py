@@ -45,6 +45,16 @@ def resources():
 @search_bp.route('/selectlogin',methods=['GET'])
 def select():
     return render_template('select_login.html')
+@search_bp.route('/admin_interships',methods=['GET'])
+def admin_internships():
+    internships = db.session.query(Internship).all()   # replace with your DB function
+    return render_template('internship.html', internships=internships)
+@search_bp.route('/admin_trainings',methods=['GET'])
+def admin_trainings():
+    training = db.session.query(Training).all()   # replace with your DB function
+    return render_template('training.html', training=training)
+
+
 
 
 

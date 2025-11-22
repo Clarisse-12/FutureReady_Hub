@@ -37,6 +37,6 @@ def login():
         session['email'] = user.email
 
         flash("Logged in successfully as Admin!", "success")
-        return redirect(url_for('internship.display_all') )
+        return redirect(url_for('search.dashboard') )
 
     return render_template("adminlogin.html")

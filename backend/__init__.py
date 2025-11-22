@@ -54,6 +54,11 @@ def create_app(test_config=None):
     def index():
         return render_template('index.html')
     
+    @app.route('/admin')
+    def admin_dashboard():
+        return render_template('admin_dashboard.html')
+
+    
     app.register_blueprint(search_bp)
     app.register_blueprint(auth_bp)
     app.register_blueprint(Internship_bp)

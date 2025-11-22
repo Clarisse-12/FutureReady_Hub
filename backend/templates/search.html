@@ -18,6 +18,7 @@
             </div>
         </div>
     </nav>
+
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             <ul class="flashes list-unstyled position-fixed top-0 start-50 translate-middle-x mt-3" style="z-index: 1050;">
@@ -25,7 +26,6 @@
                     <li>
                         <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
                             {{ message }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     </li>
                 {% endfor %}
@@ -52,6 +52,7 @@
         </ul>
 
         <div class="tab-content" id="searchTabsContent">
+
             <!-- Internship Search Tab -->
             <div class="tab-pane fade show active" id="internship" role="tabpanel">
                 <div class="card">
@@ -64,7 +65,7 @@
                                 </div>
 
                                 <div class="col-md-3">
-                                    <label class="form-label" >Location</label>
+                                    <label class="form-label">Location</label>
                                     <select class="form-select" id="location" name="location">
                                         <option value="">All Locations</option>
                                         <option value="kigali">Kigali</option>
@@ -73,6 +74,7 @@
                                         <option value="other">Other Rwanda</option>
                                     </select>
                                 </div>
+
                                 <div class="col-md-2">
                                     <label class="form-label">&nbsp;</label>
                                     <button type="submit" class="btn btn-primary w-100" id="searchbtn">Search</button>
@@ -86,33 +88,33 @@
                 <div class="mt-4">
                     <h5>Internship Opportunities</h5>
                     <div id="internshipResults">
-                        <!-- Results will be loaded here -->
                         <div class="text-center py-4">
                             <p class="text-muted">result of available internship opportunities</p>
                         </div>
                     </div>
                 </div>
-
-
+                <div class="col-md-8">
+                    <label class="form-label">Search internship</label>
+                    <input type="text" class="form-control" id="search-input2" placeholder="Search by title...">
+                </div>
                 <div class="container my-5">
-                    <h2 class="text-center mb-4">Available internship from Research</h2>
+                    <h2 class="text-center mb-4">Available internships</h2>
 
                     <div class="row g-4 justify-content-center">
-                        {%for data in internship%}
-                            <!-- Job Card 1 -->
-                            <div class="col-md-4">
+                        {% for data in internship %}
+                            <div class="col-md-4 sponsor-item">
                                 <div class="card h-100 shadow-sm">
                                     <div class="card-body">
-                                        <p class="mb-1"><strong>Title:</strong> {{data.title}}</p>
+                                        <p class="mb-1" data-title="{{data.title}}"><strong>Title:</strong> {{data.title}}</p>
                                         <p class="mb-1"><strong>provider:</strong> {{data.provider}}</p>
                                         <p class="mb-1"><strong>Location:</strong> {{data.location}}</p>
                                         <p class="mb-1"><strong>Salary:</strong> {{data.salary}}</p>
-                                        <p class="mb-3"><strong>Posted:</strong>{{data.posted_at}}</p>
+                                        <p class="mb-3"><strong>Posted:</strong> {{data.posted_at}}</p>
                                         <a href="{{data.link}}" class="btn btn-primary w-100">Apply Now</a>
                                     </div>
                                 </div>
                             </div>
-                        {%endfor%}
+                        {% endfor %}
                     </div>
 
                 </div>
@@ -124,120 +126,68 @@
                     <div class="card-body">
                         <form id="trainingSearchForm">
                             <div class="row g-3">
-                                <div class="col-md-4">
-                                    <label class="form-label">Search Courses</label>
-                                    <input type="text" class="form-control"  id="trainingQuery" placeholder="Course name or subject">
-                                </div>
-                               
-                                <div class="col-md-3">
-                                    <label class="form-label">Level</label>
-                                    <select class="form-select" name="level">
-                                        <option value="">All Levels</option>
-                                        <option value="beginner">Beginner</option>
-                                        <option value="intermediate">Intermediate</option>
-                                        <option value="advanced">Advanced</option>
-                                    </select>
+
+                                <div class="col-md-8">
+                                    <label class="form-label">Search Training</label>
+                                    <input type="text" class="form-control" id="search-input" placeholder="Search by title...">
                                 </div>
 
-                                <div class="col-md-3">
-                                    <label class="form-label">Location</label>
-                                    <select class="form-select" name="location">
-                                        <option value="">All Locations</option>
-                                        <option value="kigali">on-site</option>
-                                        <option value="remote">Remote</option>
-                                        <option value="hybrid">Hybrid</option>
-                                        <option value="other">Rwanda</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-2">
-                                    <label class="form-label">&nbsp;</label>
-                                    <button type="submit" class="btn btn-success w-100">Search</button>
-                                </div>
-                            </div>
-                            <div class="row mt-2">
-                                <div class="col-md-12">
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" name="freeonly" id="freeOnly">
-                                        <label class="form-check-label" for="freeOnly">Show only free courses</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" name="certification" id="withCertification">
-                                        <label class="form-check-label" for="withCertification">With certification</label>
-                                    </div>
-                                </div>
                             </div>
                         </form>
                     </div>
                 </div>
 
-                <!-- Training Results -->
-                <div class="mt-4">
-                    <h5>Training & Courses</h5>
-                    <div id="trainingResults">
-                        <!-- Results will be loaded here -->
-                        <div class="text-center py-4">
-                            <p class="text-muted">result of available training &courses opportunities</p>
-                        </div>
-                    </div>
-                </div>
-                
-
-
                 <div class="container my-5">
-                    <h2 class="text-center mb-4">Available Training randomly</h2>
+                    <h2 class="text-center mb-4">Available Training </h2>
 
                     <div class="row g-4 justify-content-center">
-                        {%for data in training%}
-                            <!-- Job Card 1 -->
-                            <div class="col-md-4">
+                        {% for data in training %}
+                            <div class="col-md-4 sponsor-item">
                                 <div class="card h-100 shadow-sm">
                                     <div class="card-body">
-                                        <p class="mb-1"><strong>Title:</strong>{{data.title}}</p>
+                                        <p class="mb-1" data-title="{{data.title}}"><strong>Title:</strong> {{data.title}}</p>
                                         <p class="mb-1"><strong>provider:</strong> {{data.provider}}</p>
-                                        <p class="mb-1"><strong>Location:</strong>{{data.location}}</p>
+                                        <p class="mb-1"><strong>Location:</strong> {{data.location}}</p>
                                         <p class="mb-1"><strong>level:</strong> {{data.level}}</p>
-                                        <p class="mb-1"><strong>paid/free:</strong>{{data.paid_free}}</p>
+                                        <p class="mb-1"><strong>paid/free:</strong> {{data.paid_free}}</p>
                                         <p class="mb-3"><strong>Posted:</strong> {{data.posted_at}}</p>
                                         <a href="{{data.link}}" class="btn btn-primary w-100">Apply Now</a>
                                     </div>
                                 </div>
                             </div>
-                        {%endfor%}
+                        {% endfor %}
                     </div>
                 </div>
-        
+
             </div>    
         </div>
     
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Internship Search Script -->
-<script type="module" src="../static/internship.js"></script>
-<script type="module" src="../static/training.js"></script>
 
+    <script type="module" src="../static/internship.js"></script>
+    <script type="module" src="../static/training.js"></script>
+    <script type="module" src="../static/search.js"></script>
+    <script type="module" src="../static/search2.js"></script>
 
-
-     <footer class="footer mt-auto py-3 bg-dark text-white">
+    <footer class="footer mt-auto py-3 bg-dark text-white">
         <div class="container text-center">
             <p class="mb-0">&copy; 2025 FutureReady Hub. Empowering youth and teenage mothers in Rwanda.</p>
         </div>
     </footer>
 
     <script>
-        // Wait for the page to load
         document.addEventListener('DOMContentLoaded', function() {
-            // Select all flash alerts
             const alerts = document.querySelectorAll('.alert');
             alerts.forEach(alert => {
-                // Set timeout to remove alert after 3 seconds (3000ms)
                 setTimeout(() => {
-                    // Bootstrap 5 method to close alert
                     const bsAlert = new bootstrap.Alert(alert);
                     bsAlert.close();
                 }, 3000);
             });
         });
     </script>
+
 </body>
 </html>

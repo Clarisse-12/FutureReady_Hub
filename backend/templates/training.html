@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manage Trainings - FutureReady Hub</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet" />
+  <style>
+    body { 
+      background-color: #f5f7fa; 
+      font-family: 'Poppins', sans-serif; 
+    }
+
+    h1, h3 { 
+      color: #004aad; 
+      font-weight: 600; 
+    }
+
+    .btn { border-radius: 8px; }
+
+    .table-admin th {
+      background-color: #e9f1ff;
+      font-weight: 700;
+      text-transform: capitalize;
+      font-size: 0.95rem;
+    }
+
+    .table-admin td { vertical-align: middle; }
+
+    .table-admin tbody tr:hover { background-color: #f2f6ff; transition: 0.2s; }
+
+    .table-responsive { border-radius: 8px; overflow: hidden; margin-bottom: 50px; }
+
+    .modal-content { border-radius: 12px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); }
+
+    .modal-header { border-radius: 12px 12px 0 0; background-color: #28a745; color: white; }
+
+    .modal-body label { font-weight: 500; }
+    .modal-body input { border-radius: 6px; }
+    .modal-body button { border-radius: 8px; }
+
+    .welcome { text-align: center; margin: 30px 0; }
+  </style>
+</head>
+<body class="d-flex flex-column min-vh-100">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="{{url_for('search.home')}}">FutureReady Hub - Admin</a>
+      <div class="navbar-nav ms-auto">
+        <a class="nav-link" href="{{url_for('auth.logout')}}">Logout</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="welcome">
+    <h1>Manage Trainings</h1>
+    <p>Efficiently manage all trainings here.</p>
+  </div>
+
+  <div class="container mt-4">
+
+    <div class="mb-3">
+        <a href="{{ url_for('search.dashboard') }}" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left"></i> Back
+        </a>
+    </div>
+    <!-- Add Training Button -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addTrainingModal">
+        <i class="bi bi-plus-circle"></i> Add Training
+      </button>
+    </div>
+
+    <!-- Trainings Table -->
+    <div class="table-responsive">
+      <table class="table table-hover table-admin align-middle">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Provider</th>
+            <th>Location</th>
+            <th>Level</th>
+            <th>Paid/Free</th>
+            <th>Posted At</th>
+            <th>Link</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for data in  adminDashboard  %}
+          <tr>
+            <td>{{ data.title }}</td>
+            <td>{{ data.provider }}</td>
+            <td>{{ data.location }}</td>
+            <td>{{ data.level }}</td>
+            <td>{{ data.paid_free }}</td>
+            <td>{{ data.posted_at }}</td>
+            <td><a href="{{ data.link }}" target="_blank" class="btn btn-sm btn-outline-info">Follow Link</a></td>
+            <td>
+              <button class="btn btn-sm btn-outline-danger delete-training-btn" data-training-id="{{data.training_id}}">
+                <i class="bi bi-trash"></i> Delete
+              </button>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Add Training Modal -->
+  <div class="modal fade" id="addTrainingModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5>Add New Training</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form action="{{ url_for('training.add_training') }}" method="POST">
+            <div class="mb-3">
+              <label class="form-label">Title</label>
+              <input type="text" name="title" class="form-control" placeholder="Web Developer Training" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Provider</label>
+              <input type="text" name="provider" class="form-control" placeholder="Company name" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Location</label>
+              <input type="text" name="location" class="form-control" placeholder="Kigali, Rwanda" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Level</label>
+              <input type="text" name="level" class="form-control" placeholder="Beginner, Intermediate..." required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Paid/Free</label>
+              <input type="text" name="paid_free" class="form-control" placeholder="Paid or Free" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Link</label>
+              <input type="url" name="link" class="form-control" placeholder="https://www.company.com/training-apply" required>
+            </div>
+            <button type="submit" class="btn btn-success w-100">Add Training</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="bg-dark text-white py-4 mt-auto text-center">
+    <p class="mb-0">&copy; FutureReady Hub © 2025 — Admin Panel</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="{{ url_for('static', filename='training_delete.js') }}"></script>
+</body>
+</html>

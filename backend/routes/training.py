@@ -30,7 +30,7 @@ def add_training():
         except Exception as e:
             flash(f'unexpected error occured: {e}', 'danger')
             return redirect(url_for('training.display_all'))
-    return render_template('dashboard.html')
+    return render_template('training.html')
 
 @Training_bp.route('/delete/<int:id>',methods=['DELETE']) #done
 def delete_training(id):
@@ -50,4 +50,4 @@ def delete_training(id):
 @Training_bp.route('/displayall',methods=['GET'])
 def display_all():
     adminDashboard = db.session.query(Training).all()
-    return render_template('dashboard.html',adminDashboard=adminDashboard)
+    return render_template('training.html',adminDashboard=adminDashboard)

@@ -51,7 +51,7 @@ def delete_internship(id):
 @Internship_bp.route('/displayall',methods=['GET'])
 def display_all():
     adminDashboard = db.session.query(Internship).all()
-    return render_template('dashboard.html',adminDashboard=adminDashboard)
+    return render_template('internship.html',adminDashboard=adminDashboard)
 
 
 
