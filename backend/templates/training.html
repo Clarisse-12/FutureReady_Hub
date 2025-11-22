@@ -30,11 +30,11 @@
 
     .table-admin tbody tr:hover { background-color: #f2f6ff; transition: 0.2s; }
 
-    .table-responsive { border-radius: 8px; overflow: hidden; margin-bottom: 50px; }
+    .table-responsive { border-radius: 8px; overflow-x: auto; margin-bottom: 50px; }
 
     .modal-content { border-radius: 12px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); }
 
-    .modal-header { border-radius: 12px 12px 0 0; background-color: #28a745; color: white; }
+    .modal-header { border-radius: 12px 12px 0 0; background-color: #198754; color: white; }
 
     .modal-body label { font-weight: 500; }
     .modal-body input { border-radius: 6px; }
@@ -45,7 +45,7 @@
 </head>
 <body class="d-flex flex-column min-vh-100">
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-success">
     <div class="container">
       <a class="navbar-brand fw-bold" href="{{url_for('search.home')}}">FutureReady Hub - Admin</a>
       <div class="navbar-nav ms-auto">
@@ -55,19 +55,20 @@
   </nav>
 
   <div class="welcome">
-    <h1>Manage Trainings</h1>
-    <p>Efficiently manage all trainings here.</p>
+    <h1>Add Trainings Here</h1>
+    <p>manage training by add training or delete training</p>
   </div>
 
-  <div class="container mt-4">
-
+  <div class="container-fluid mt-4">
+    <!-- Back Button -->
     <div class="mb-3">
         <a href="{{ url_for('search.dashboard') }}" class="btn btn-outline-secondary">
             <i class="bi bi-arrow-left"></i> Back
         </a>
     </div>
+
     <!-- Add Training Button -->
-    <div class="d-flex justify-content-between align-items-center mb-3">
+    <div class="d-flex justify-content-start mb-3">
       <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addTrainingModal">
         <i class="bi bi-plus-circle"></i> Add Training
       </button>
@@ -75,7 +76,7 @@
 
     <!-- Trainings Table -->
     <div class="table-responsive">
-      <table class="table table-hover table-admin align-middle">
+      <table class="table table-sm table-hover table-admin align-middle">
         <thead>
           <tr>
             <th>Title</th>
@@ -89,7 +90,7 @@
           </tr>
         </thead>
         <tbody>
-          {% for data in  adminDashboard  %}
+          {% for data in adminDashboard %}
           <tr>
             <td>{{ data.title }}</td>
             <td>{{ data.provider }}</td>
@@ -97,7 +98,11 @@
             <td>{{ data.level }}</td>
             <td>{{ data.paid_free }}</td>
             <td>{{ data.posted_at }}</td>
-            <td><a href="{{ data.link }}" target="_blank" class="btn btn-sm btn-outline-info">Follow Link</a></td>
+            <td>
+              <a href="{{ data.link }}" target="_blank" class="btn btn-sm btn-outline-info">
+                Follow Link
+              </a>
+            </td>
             <td>
               <button class="btn btn-sm btn-outline-danger delete-training-btn" data-training-id="{{data.training_id}}">
                 <i class="bi bi-trash"></i> Delete
@@ -134,7 +139,7 @@
             </div>
             <div class="mb-3">
               <label class="form-label">Level</label>
-              <input type="text" name="level" class="form-control" placeholder="Beginner, Intermediate..." required>
+              <input type="text" name="level" class="form-control" placeholder="Beginner, Intermediate, Advanced" required>
             </div>
             <div class="mb-3">
               <label class="form-label">Paid/Free</label>
@@ -151,6 +156,7 @@
     </div>
   </div>
 
+  <!-- Footer -->
   <footer class="bg-dark text-white py-4 mt-auto text-center">
     <p class="mb-0">&copy; FutureReady Hub © 2025 — Admin Panel</p>
   </footer>
