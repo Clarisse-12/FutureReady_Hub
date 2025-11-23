@@ -30,7 +30,9 @@ def create_app(test_config=None):
     
 
 
-    init_extensions(app) 
+    init_extensions(app)
+    with app.app_context():
+        db.create_all()
    
     
     from .models import User, Internship, Training, SearchHistory
