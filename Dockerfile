@@ -5,7 +5,7 @@ FROM python:3.11-slim
 ENV PYTHONUNBUFFERED=1
 
 # Set working directory
-WORKDIR /backend
+WORKDIR /app
 
 # Install system packages required by psycopg2
 RUN apt-get update && apt-get install -y \
@@ -25,4 +25,4 @@ COPY . .
 EXPOSE 5000
 
 # Run app using Gunicorn and factory function
-CMD ["gunicorn", "--bind", "0.0.0.0:5000", "backend:create_app()"]
+CMD gunicorn, --bind, 0.0.0.0:5000, 'backend:create_app()''
