@@ -25,4 +25,4 @@ COPY . .
 EXPOSE 5000
 
 # Run app using Gunicorn and factory function
-CMD gunicorn, --bind, 0.0.0.0:5000, 'backend:create_app()''
+CMD gunicorn, --bind, 0.0.0.0:5000, 'backend:create_app()'
