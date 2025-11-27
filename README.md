@@ -21,7 +21,7 @@ The platform aims to reduce youth unemployment, promote digital inclusion, and h
 
 📽️ Demo Video
 
-👉 (Insert your Google Drive or YouTube link here)
+👉 https://youtu.be/pBBPG0S7s2Y
 
 
 📄 Documents
@@ -44,7 +44,7 @@ Logout
 
 View resources:
 
-Resume-building templates
+Resume-building templates link
 
 Interview tips
 
